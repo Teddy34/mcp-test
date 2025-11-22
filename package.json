@@ -1,0 +1,25 @@
+{
+  "name": "mcp-test",
+  "version": "1.0.0",
+  "description": "MCP server with tools and prompts",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "node test-simple.js"
+  },
+  "keywords": ["mcp", "model-context-protocol"],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bin": {
+    "mcp-test": "./index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.22.0"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.13"
+  }
+}
