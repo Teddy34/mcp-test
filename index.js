@@ -11,6 +11,10 @@ import {
 import { handleToolCall, listTools } from './lib/tools.js';
 import { handleGetPrompt, listPrompts } from './lib/prompts.js';
 
+// Adapters for point-free handler composition
+const toolCallAdapter = ({ name, arguments: args }) => handleToolCall(name, args);
+const promptAdapter = ({ name, arguments: args }) => handleGetPrompt(name, args);
+
 const createServer = () =>
   new Server(
     { name: 'example-mcp-server', version: '0.1.0' },
@@ -18,22 +22,15 @@ const createServer = () =>
   );
 
 const registerHandlers = (server) => {
-  server.setRequestHandler(ListToolsRequestSchema, () =>
-    Promise.resolve(listTools())
-  );
+  server.setRequestHandler(ListToolsRequestSchema, listTools);
+  server.setRequestHandler(ListPromptsRequestSchema, listPrompts);
 
   server.setRequestHandler(CallToolRequestSchema, (request) =>
-    Promise.resolve(request.params)
-      .then(({ name, arguments: args }) => handleToolCall(name, args))
-  );
-
-  server.setRequestHandler(ListPromptsRequestSchema, () =>
-    Promise.resolve(listPrompts())
+    Promise.resolve(request.params).then(toolCallAdapter)
   );
 
   server.setRequestHandler(GetPromptRequestSchema, (request) =>
-    Promise.resolve(request.params)
-      .then(({ name, arguments: args }) => handleGetPrompt(name, args))
+    Promise.resolve(request.params).then(promptAdapter)
   );
 
   return server;
@@ -41,11 +38,12 @@ const registerHandlers = (server) => {
 
 const startServer = (server) =>
   Promise.resolve(new StdioServerTransport())
-    .then((transport) => server.connect(transport))
+    .then(server.connect.bind(server))
     .then(() => console.error('MCP Server running on stdio'));
 
 // Main execution
-Promise.resolve(createServer())
+Promise.resolve()
+  .then(createServer)
   .then(registerHandlers)
   .then(startServer)
   .catch((error) => {
