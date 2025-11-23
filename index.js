@@ -7,9 +7,19 @@ import {
   ListToolsRequestSchema,
   ListPromptsRequestSchema,
   GetPromptRequestSchema,
+  ListResourcesRequestSchema,
+  ListResourceTemplatesRequestSchema,
+  ReadResourceRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
-import { handleToolCall, listTools } from './lib/tools.js';
-import { handleGetPrompt, listPrompts } from './lib/prompts.js';
+import {
+  listTools,
+  handleToolCall,
+  listPrompts,
+  handleGetPrompt,
+  listResources,
+  listResourceTemplates,
+  readResource,
+} from './src/handlers/index.js';
 
 // Adapters for point-free handler composition
 const toolCallAdapter = ({ name, arguments: args }) => handleToolCall(name, args);
@@ -18,12 +28,16 @@ const promptAdapter = ({ name, arguments: args }) => handleGetPrompt(name, args)
 const createServer = () =>
   new Server(
     { name: 'example-mcp-server', version: '0.1.0' },
-    { capabilities: { tools: {}, prompts: {} } }
+    { capabilities: { tools: {}, prompts: {}, resources: {} } }
   );
+
+const resourceAdapter = ({ uri }) => readResource(uri);
 
 const registerHandlers = (server) => {
   server.setRequestHandler(ListToolsRequestSchema, listTools);
   server.setRequestHandler(ListPromptsRequestSchema, listPrompts);
+  server.setRequestHandler(ListResourcesRequestSchema, listResources);
+  server.setRequestHandler(ListResourceTemplatesRequestSchema, listResourceTemplates);
 
   server.setRequestHandler(CallToolRequestSchema, (request) =>
     Promise.resolve(request.params).then(toolCallAdapter)
@@ -31,6 +45,10 @@ const registerHandlers = (server) => {
 
   server.setRequestHandler(GetPromptRequestSchema, (request) =>
     Promise.resolve(request.params).then(promptAdapter)
+  );
+
+  server.setRequestHandler(ReadResourceRequestSchema, (request) =>
+    Promise.resolve(request.params).then(resourceAdapter)
   );
 
   return server;

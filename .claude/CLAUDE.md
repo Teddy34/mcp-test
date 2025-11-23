@@ -11,13 +11,26 @@ This is an MCP (Model Context Protocol) server implementation using stdio transp
 
 ## Project Structure
 
-- `index.js` - Main MCP server with tools and prompts
-- `lib/` - Core modules with collocated unit tests
-  - `tools.js` / `tools.test.js` - Tool implementations
-  - `prompts.js` / `prompts.test.js` - Prompt implementations
+- `index.js` - Main MCP server entry point
+- `src/` - Core modules with collocated unit tests
+  - `handlers/` - MCP protocol routing
+    - `tools.handler.js` - Routes tool requests
+    - `prompts.handler.js` - Routes prompt requests
+    - `resources.handler.js` - Routes resource requests
+  - `tools/` - Tool implementations (business logic)
+    - `echo.js` - Echo tool
+    - `add.js` - Add tool
+  - `prompts/` - Prompt implementations
+    - `code-review.js` - Security-focused code review
+    - `helpful-assistant.js` - Polite, concise assistant
+    - `pirate-mode.js` - Pirate speak mode
+  - `resources/` - Resource implementations (readable data)
+    - `server-info.js` - Server metadata
+    - `greeting.js` - Parameterized greeting
+  - `connectors/` - External resource access (DB, APIs)
 - `e2e/` - End-to-end tests
-  - `test-client.js` - Interactive client for debugging
-  - `test-simple.js` - Automated smoke test
+  - `interactive.js` - Interactive client for debugging
+  - `smoke.js` - Automated smoke test
 
 ## Running
 
@@ -29,10 +42,10 @@ node index.js
 npm test
 
 # Interactive e2e testing
-node e2e/test-client.js
+node e2e/interactive.js
 
 # Automated e2e test
-node e2e/test-simple.js
+node e2e/smoke.js
 ```
 
 ## MCP Features
@@ -45,6 +58,10 @@ node e2e/test-simple.js
 - `code-review` - Security-focused code review
 - `helpful-assistant` - Polite, concise assistant
 - `pirate-mode` - Pirate speak mode
+
+### Resources
+- `info://server` - Server metadata (static)
+- `greeting://{name}` - Personalized greeting (template)
 
 ## Development Notes
 
