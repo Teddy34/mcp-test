@@ -6,10 +6,14 @@
   "scripts": {
     "start": "node index.js",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
-    "test:e2e": "node test-simple.js"
+    "test:e2e": "node e2e/smoke.js"
   },
-  "keywords": ["mcp", "model-context-protocol"],
+  "keywords": [
+    "mcp",
+    "model-context-protocol"
+  ],
   "author": "",
   "license": "ISC",
   "type": "module",
@@ -20,6 +24,7 @@
     "@modelcontextprotocol/sdk": "^1.22.0"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.13",
     "vitest": "^4.0.13"
   }
 }

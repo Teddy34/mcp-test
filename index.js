@@ -11,15 +11,13 @@ import {
   ListResourceTemplatesRequestSchema,
   ReadResourceRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
+import { listTools, handleToolCall } from './src/handlers/tools.handler.js';
+import { listPrompts, handleGetPrompt } from './src/handlers/prompts.handler.js';
 import {
-  listTools,
-  handleToolCall,
-  listPrompts,
-  handleGetPrompt,
   listResources,
   listResourceTemplates,
   readResource,
-} from './src/handlers/index.js';
+} from './src/handlers/resources.handler.js';
 
 // Adapters for point-free handler composition
 const toolCallAdapter = ({ name, arguments: args }) => handleToolCall(name, args);

@@ -1,6 +1,15 @@
 // Tools handler - routes MCP tool requests to tool implementations
 
-import { definitions, execute } from '../tools/index.js';
+import * as echo from '../tools/echo.js';
+import * as add from '../tools/add.js';
+
+const toolList = [echo, add];
+
+const definitions = toolList.map((t) => t.definition);
+
+const executors = Object.fromEntries(
+  toolList.map((t) => [t.definition.name, t.execute])
+);
 
 // MCP content wrapper
 const textContent = (text) => ({
@@ -11,4 +20,10 @@ const textContent = (text) => ({
 export const listTools = () => ({ tools: definitions });
 
 // Handle tool call request
-export const handleToolCall = (name, args) => textContent(execute(name, args));
+export const handleToolCall = (name, args) => {
+  const executor = executors[name];
+  if (!executor) {
+    throw new Error(`Unknown tool: ${name}`);
+  }
+  return textContent(executor(args));
+};

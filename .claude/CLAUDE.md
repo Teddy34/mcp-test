@@ -92,3 +92,9 @@ it('handles tool call with arguments', () => {
 ```
 
 Use AAA when: complex setup, multiple assertions, debugging is likely, or test logic isn't immediately obvious.
+
+### Module Conventions
+
+- **No index.js in subfolders** - Name files after what they provide (e.g., `tools.handler.js` not `index.js`)
+- **Direct imports** - Import specific modules directly, avoid aggregator/barrel files
+- **Explicit dependencies** - Each file should import exactly what it needs, making dependencies traceable
