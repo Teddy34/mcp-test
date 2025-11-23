@@ -65,4 +65,30 @@ node e2e/smoke.js
 
 ## Development Notes
 
-<!-- Add project-specific notes, conventions, and context here -->
+### Testing Strategy
+
+Choose test style based on complexity:
+
+**Compact style** - for simple pure functions:
+```javascript
+it('adds two numbers', () => {
+  expect(add(2, 3)).toBe(5);
+});
+```
+
+**AAA pattern** - for complex tests with setup or multiple steps:
+```javascript
+it('handles tool call with arguments', () => {
+  // Arrange
+  const name = 'echo';
+  const args = { message: 'test' };
+
+  // Act
+  const result = handleToolCall(name, args);
+
+  // Assert
+  expect(result.content[0].text).toBe('Echo: test');
+});
+```
+
+Use AAA when: complex setup, multiple assertions, debugging is likely, or test logic isn't immediately obvious.
