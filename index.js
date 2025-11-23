@@ -8,8 +8,12 @@ import {
   ListPromptsRequestSchema,
   GetPromptRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
-import { handleToolCall, listTools } from './lib/tools.js';
-import { handleGetPrompt, listPrompts } from './lib/prompts.js';
+import {
+  listTools,
+  handleToolCall,
+  listPrompts,
+  handleGetPrompt,
+} from './lib/handlers/index.js';
 
 // Adapters for point-free handler composition
 const toolCallAdapter = ({ name, arguments: args }) => handleToolCall(name, args);
