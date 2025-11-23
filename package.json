@@ -21,7 +21,8 @@
     "mcp-test": "./index.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.22.0"
+    "@modelcontextprotocol/sdk": "^1.22.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.0.13",
