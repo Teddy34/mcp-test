@@ -73,7 +73,7 @@ const runTestSequence = (server) => {
 };
 
 // Main execution
-const spawnServer = () => spawn('node', ['index.js']);
+const spawnServer = () => spawn('node', ['../index.js'], { cwd: import.meta.dirname });
 
 const attachHandlers = (server) => {
   server.stdout.on('data', processLines);

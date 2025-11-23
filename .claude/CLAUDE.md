@@ -12,8 +12,12 @@ This is an MCP (Model Context Protocol) server implementation using stdio transp
 ## Project Structure
 
 - `index.js` - Main MCP server with tools and prompts
-- `test-client.js` - Interactive client for debugging
-- `test-simple.js` - Automated smoke test
+- `lib/` - Core modules with collocated unit tests
+  - `tools.js` / `tools.test.js` - Tool implementations
+  - `prompts.js` / `prompts.test.js` - Prompt implementations
+- `e2e/` - End-to-end tests
+  - `test-client.js` - Interactive client for debugging
+  - `test-simple.js` - Automated smoke test
 
 ## Running
 
@@ -21,11 +25,14 @@ This is an MCP (Model Context Protocol) server implementation using stdio transp
 # Start server (used by MCP clients)
 node index.js
 
-# Interactive testing
-node test-client.js
+# Run unit tests
+npm test
 
-# Automated test
-node test-simple.js
+# Interactive e2e testing
+node e2e/test-client.js
+
+# Automated e2e test
+node e2e/test-simple.js
 ```
 
 ## MCP Features

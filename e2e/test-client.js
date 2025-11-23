@@ -4,7 +4,7 @@ import { spawn } from 'child_process';
 import * as readline from 'readline';
 
 // Start the MCP server
-const server = spawn('node', ['index.js']);
+const server = spawn('node', ['../index.js'], { cwd: import.meta.dirname });
 
 let messageId = 1;
 
