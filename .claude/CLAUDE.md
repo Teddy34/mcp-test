@@ -8,6 +8,7 @@ This is an MCP (Model Context Protocol) server implementation using stdio transp
 
 - Node.js (ES modules)
 - @modelcontextprotocol/sdk
+- lodash/fp (functional utilities)
 
 ## Project Structure
 
@@ -98,3 +99,8 @@ Use AAA when: complex setup, multiple assertions, debugging is likely, or test l
 - **No index.js in subfolders** - Name files after what they provide (e.g., `tools.handler.js` not `index.js`)
 - **Direct imports** - Import specific modules directly, avoid aggregator/barrel files
 - **Explicit dependencies** - Each file should import exactly what it needs, making dependencies traceable
+- **Lodash/fp imports** - Use individual file imports for FP utilities:
+  ```javascript
+  import map from 'lodash/fp/map.js';
+  import flow from 'lodash/fp/flow.js';
+  ```
