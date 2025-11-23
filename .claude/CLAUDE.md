@@ -25,8 +25,8 @@ This is an MCP (Model Context Protocol) server implementation using stdio transp
     - `pirate-mode.js` - Pirate speak mode
   - `connectors/` - External resource access (DB, APIs)
 - `e2e/` - End-to-end tests
-  - `test-client.js` - Interactive client for debugging
-  - `test-simple.js` - Automated smoke test
+  - `interactive.js` - Interactive client for debugging
+  - `smoke.js` - Automated smoke test
 
 ## Running
 
@@ -38,10 +38,10 @@ node index.js
 npm test
 
 # Interactive e2e testing
-node e2e/test-client.js
+node e2e/interactive.js
 
 # Automated e2e test
-node e2e/test-simple.js
+node e2e/smoke.js
 ```
 
 ## MCP Features
