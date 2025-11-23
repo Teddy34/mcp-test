@@ -35,9 +35,12 @@ const testSequence = [
   { method: 'initialize', params: { protocolVersion: '2024-11-05', capabilities: {}, clientInfo: { name: 'test-client', version: '1.0.0' } }, delay: 0 },
   { method: 'tools/list', params: {}, delay: 100 },
   { method: 'prompts/list', params: {}, delay: 200 },
-  { method: 'tools/call', params: { name: 'echo', arguments: { message: 'Hello MCP!' } }, delay: 300 },
-  { method: 'tools/call', params: { name: 'add', arguments: { a: 10, b: 32 } }, delay: 400 },
-  { method: 'prompts/get', params: { name: 'pirate-mode' }, delay: 500 },
+  { method: 'resources/list', params: {}, delay: 300 },
+  { method: 'tools/call', params: { name: 'echo', arguments: { message: 'Hello MCP!' } }, delay: 400 },
+  { method: 'tools/call', params: { name: 'add', arguments: { a: 10, b: 32 } }, delay: 500 },
+  { method: 'prompts/get', params: { name: 'pirate-mode' }, delay: 600 },
+  { method: 'resources/read', params: { uri: 'info://server' }, delay: 700 },
+  { method: 'resources/read', params: { uri: 'greeting://World' }, delay: 800 },
 ];
 
 // Side-effect functions
