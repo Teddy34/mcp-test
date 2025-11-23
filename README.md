@@ -1,7 +1,7 @@
 # mcp-test
 
 [![CI](https://github.com/Teddy34/mcp-test/actions/workflows/ci.yml/badge.svg)](https://github.com/Teddy34/mcp-test/actions/workflows/ci.yml)
-![Coverage](./badges/coverage.svg)
+![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
 
 MCP (Model Context Protocol) server implementation using stdio transport.
 
