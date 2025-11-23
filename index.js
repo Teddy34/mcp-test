@@ -13,7 +13,7 @@ import {
   handleToolCall,
   listPrompts,
   handleGetPrompt,
-} from './lib/handlers/index.js';
+} from './src/handlers/index.js';
 
 // Adapters for point-free handler composition
 const toolCallAdapter = ({ name, arguments: args }) => handleToolCall(name, args);

@@ -12,7 +12,7 @@ This is an MCP (Model Context Protocol) server implementation using stdio transp
 ## Project Structure
 
 - `index.js` - Main MCP server entry point
-- `lib/` - Core modules with collocated unit tests
+- `src/` - Core modules with collocated unit tests
   - `handlers/` - MCP protocol routing
     - `tools.handler.js` - Routes tool requests
     - `prompts.handler.js` - Routes prompt requests
